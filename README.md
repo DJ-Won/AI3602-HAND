@@ -2,7 +2,11 @@
 
 Your personal travel agent!
 
-Demo of Group17 is now available!
+Demo of Group17 is now available by running HANDv2.py!
+```
+torch, openai, pyqt5, matplotlib, contextily, osmnx, networkx 
+```
+is required to run the program. Please modify the API of GPT if you have one.
 
 Download the map data from [here](https://drive.google.com/file/d/16OEmMYO8IPrwdBZ5O7T_PQp_juIS77cy/view?usp=sharing) unzip and place it under hourly_graphs(new folder)
 ```
