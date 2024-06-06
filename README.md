@@ -8,7 +8,7 @@ torch, openai, pyqt5, matplotlib, contextily, osmnx, networkx
 ```
 is required to run the program. Please modify the API of GPT if you have one.
 
-Download the map data from [here](https://drive.google.com/file/d/16OEmMYO8IPrwdBZ5O7T_PQp_juIS77cy/view?usp=sharing) unzip and place it under hourly_graphs(new folder)
+Download the map data from [here](https://drive.google.com/file/d/16OEmMYO8IPrwdBZ5O7T_PQp_juIS77cy/view?usp=sharing) unzip and place it under hourly_graphs(new folder). In fact, we obtained these files by processing the raw data using script build_graph.py.
 ```
 -hourly_graphs
 |-pkl
