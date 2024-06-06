@@ -11,10 +11,11 @@ from shapely.geometry import Point, LineString
 import datetime as dt
 import time
 
+# match origin and destination to the nearest edge
 def match_point_to_edge(G, point):
     nearest_edge_idx = ox.distance.nearest_edges(G, point.x, point.y, return_dist=True)
-    edge = (nearest_edge_idx[0][0], nearest_edge_idx[0][1])  # (u, v)
-    edge_data = G.get_edge_data(*edge)[0]  # ʹ�õ�һ�����ı�����
+    edge = (nearest_edge_idx[0][0], nearest_edge_idx[0][1]) 
+    edge_data = G.get_edge_data(*edge)[0] 
     #print(G.nodes[nearest_edge_idx[0][0]])
     if 'geometry' not in edge_data:
         point_u = Point(G.nodes[nearest_edge_idx[0][0]]['x'], G.nodes[nearest_edge_idx[0][0]]['y'])
@@ -71,19 +72,19 @@ def calculate_and_visualize_path(G, origin, destination, start_time, request_dir
     route_line = LineString(route_points)
     minx, miny, maxx, maxy = route_line.bounds
 
-    # ����ͼ�����ĵ�ͱ߽�
+    # move the route to center
     center_lat = (miny + maxy) / 2
     center_lon = (minx + maxx) / 2
     lat_extent = maxy - miny
     lon_extent = maxx - minx
-    padding = max(lat_extent, lon_extent) * 0.1  # ������ֵ�����ӻ�������ż���
+    padding = max(lat_extent, lon_extent) * 0.1  # set to zoom the map
 
     north = maxy + padding
     south = miny - padding
     east = maxx + padding
     west = minx - padding
 
-    # ���ӻ�·��
+    # plot the route
     fig, ax = ox.plot_graph_route(G, route, route_color='orangered', node_size=0, bgcolor='white', edge_linewidth=1, show=False, close=False)
     
     for i in range(len(route) - 1):
@@ -100,7 +101,7 @@ def calculate_and_visualize_path(G, origin, destination, start_time, request_dir
         x, y = edge_geometry.xy
         ax.plot(x, y, color=color, linewidth=4)
     
-    # ��ͼ�б�������յ�
+    # set origin and destination
     ax.scatter([origin[1]], [origin[0]], edgecolor='lightblue', facecolor='aqua', s=200, label='Origin', linewidth=3)
     ax.scatter([destination[1]], [destination[0]], edgecolor='violet', facecolor='fuchsia', s=200, label='Destination', linewidth=3)
 
@@ -115,8 +116,8 @@ def calculate_and_visualize_path(G, origin, destination, start_time, request_dir
     ax.set_xticks([])
     ax.set_yticks([])
 
-    # ����ͼ�ĳ�������
     ax.set_aspect(aspect='equal')
+    # label set here
     legend_elements = [Line2D([0], [0], color='orangered', lw=4, label='turtle craw'),
                     Line2D([0], [0], color='gold', lw=4, label='dog run'),
                     #Line2D([0], [0], color='yellow', lw=4, label='20-30 km/h'),
