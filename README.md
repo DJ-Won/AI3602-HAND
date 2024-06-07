@@ -15,10 +15,11 @@ Download the map data from [here](https://drive.google.com/file/d/16OEmMYO8IPrwd
 |-pkl
 ...
 ```
-Download the car data from [here](https://drive.google.com/file/d/1iqU8ncFBA6r9G3BluEUiez0gSeqCInMu/view?usp=sharing) unzip and place it under 'traj', it shall be like 
+Download the car data from [here](https://drive.google.com/file/d/1NTJxSAOmpBA6HbFZu7c9dBF-UUk-rx1H/view?usp=drive_link) unzip and place it under 'traj', it shall be like 
 
 ```
 traj/preprocess.csv
+traj/model.pt
 ```
 
 If you think this demo is interesting or helpful, a star is a huge courage!
