@@ -20,16 +20,17 @@ class outputLayer(nn.Module):
 class mlpMetaEmbedding(nn.Module):
     def __init__(self, vocal_max):
         super(mlpMetaEmbedding, self).__init__()
-        self.embed = nn.Linear(vocal_max + 1, 32)  # padding
-        self.conv = nn.Conv1d(32, 32, kernel_size=3, padding=1)
-        N = 32
+        self.embed = nn.Embedding(vocal_max, 100, padding_idx=0) 
+        self.conv = nn.Conv1d(100, 64, kernel_size=3, padding=1)
+        N = 65
         self.out = outputLayer(N)
 
-    def forward(self, x):
+    def forward(self, x,t):
         embedding = self.embed(x)  # B,T,32
         embedding = embedding.permute(0, 2, 1)  # B,C,T
         l1 = F.relu(self.conv(embedding))
         l1_max = torch.max(l1, dim=-1)[0]  # B,32 over-time-maxpooling
         l1_max_norm = l1_max/torch.norm(l1_max,dim=-1,keepdim=True)
         features = l1_max_norm
+        features = torch.cat([features,t],dim=1)
         return self.out(features)
